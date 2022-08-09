@@ -1,11 +1,10 @@
-from math import dist, ceil
 import random
+from math import ceil, dist
+
 import pygame
-import numpy as np
 from numpy import array
 
 from config import *
-
 
 CONT = 0
 
