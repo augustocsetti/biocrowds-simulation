@@ -20,7 +20,7 @@ class Marker(pygame.sprite.Sprite):
         self.color_base = color
         self.color = self.color_base
         self.image = pygame.Surface((5, 5), pygame.SRCALPHA)
-        self.rect = pygame.draw.circle(self.image, self.color, self.image.get_rect().center, 2)
+        self.rect = pygame.draw.circle(self.image, self.color, self.image.get_rect().center, 1)
         self.rect.center = position
 
         self.position = array(position, dtype=float)  
@@ -30,7 +30,8 @@ class Marker(pygame.sprite.Sprite):
         pygame.draw.circle(window, self.color, self.position, 1)
 
 
-    def set_owner(self, agents):
+    def set_owner(self, agents): # AQUI melhorar - implementar verificação da visão para cada agente(?)
+        # search closest agent
         closest_agent = None
         closest_dist = 9999999999
         for agent in agents:
@@ -39,6 +40,7 @@ class Marker(pygame.sprite.Sprite):
                 closest_agent = agent
                 closest_dist = distance
         
+        # check if agent is seeing marker
         if closest_dist < VISION:
             closest_agent.markers.append(self)
             self.owner = closest_agent
@@ -47,7 +49,7 @@ class Marker(pygame.sprite.Sprite):
             self.owner = None
             self.set_color(self.color_base)      
 
-    def set_color(self, color:tuple):
+    def set_color(self, color:tuple): # AQUI problema ao colorir marcadores
         # self.color = color
         # self.image.fill(color)
         pass
@@ -103,6 +105,7 @@ class Field:
         for n in neighborhood:
             self.current_grid[n[0]][n[1]].append(marker)
 
+        # LOG marker
         # print(f'==================== NEW MARKER {marker.id} ====================')
         # for i in range(len(self.current_grid)):
         #     for j in range(len(self.current_grid[i])):
@@ -111,9 +114,9 @@ class Field:
         #             for m in self.current_grid[i][j]:
         #                 ids.append(m.id)
         #             print(f'grid:({i}, {j}): {ids}')
-
         # if m.id == 10:
-        #     exit()   
+        #     exit()
+           
         return
     
     def set_markers_owner_by_grid(self, agents:list, grid:tuple):

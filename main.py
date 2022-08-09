@@ -1,15 +1,12 @@
 import random
 import sys
-from array import array
-from math import ceil, dist
 
 import pygame
-import numpy as np
 from numpy import array
 
 from agent import Agent
 from config import *
-from marker import Field, Marker
+from marker import Field
 
 
 def draw_grids(window):
@@ -20,7 +17,7 @@ def draw_grids(window):
 
 # simulations
 
-def simulation_0(quantity=1):
+def simulation_0(quantity=10):
     agents = []
     for i in range(quantity):
         agents.append(Agent(position=(SCREENWIDTH-50, 50), goal=(0, SCREENHEIGHT)))
@@ -56,9 +53,9 @@ def simulation_2(quantities=10, lines=2):
     return agents
 
 simulations = {
-    '0': simulation_0(),
-    '1': simulation_1(),
-    '2': simulation_2(),
+    '0': simulation_0,
+    '1': simulation_1,
+    '2': simulation_2,
 }
 
 if __name__ == '__main__':
@@ -79,7 +76,7 @@ if __name__ == '__main__':
     
     # initial agents AQUI
     agents = []
-    agents = simulations[args[0]]
+    agents = simulations[args[0]]()
 
     # matrix to store the current grid of all agents
     current_grid = [[[] for i in range(field.grid_len[1])] for j in range(field.grid_len[0])]
@@ -95,7 +92,8 @@ if __name__ == '__main__':
                 pygame.quit()
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                agents.append(Agent((mouse_pos), goal=(0, SCREENHEIGHT))) # AQUI CONTINUAR
+                #agents.append(Agent((mouse_pos), goal=(0, SCREENHEIGHT))) # AQUI CONTINUAR
+                pass
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_r:
                     agents = agents[:-1]
@@ -116,14 +114,15 @@ if __name__ == '__main__':
                 if current_grid[x][y]:
                     field.set_markers_owner_by_grid(current_grid[x][y], (x, y))
 
-        for mark in field.markers:
-            mark.draw(window)
-        draw_grids(window)
+        # draw markers and grid
+        # for marker in field.markers:
+        #     marker.draw(window)
+        # draw_grids(window)
 
         for agent in agents:
             agent.update(window)
 
-            # if agent gets his goal AQUI CONTINUAR
+            # check if agent hit his goal AQUI CONTINUAR
             if agent.on:
                 agent.draw(window)
             else:

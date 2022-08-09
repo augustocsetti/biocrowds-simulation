@@ -22,7 +22,6 @@ class VisionSensor(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)    
 
         self.radius = ratio
-        
         self.image = pygame.Surface((ratio*2, ratio*2), pygame.SRCALPHA)
         self.rect = pygame.draw.circle(self.image, GREEN, self.image.get_rect().center, self.radius, 1)
         self.rect.center = position
@@ -31,16 +30,18 @@ class VisionSensor(pygame.sprite.Sprite):
         self.rect.center = position
 
     def draw(self, window, color):
-        pygame.draw.circle(window, color, self.rect.center, self.radius, 1)  
         # window.blit(self.image, self.rect)
+        pygame.draw.circle(window, color, self.rect.center, self.radius, 1)  
 
 
 class Agent(pygame.sprite.Sprite):
     def __init__(self, position, goal, color=None) -> None:
         pygame.sprite.Sprite.__init__(self)
-        global CONT
 
         self.on = True
+
+        # agent id
+        global CONT
         self.id = CONT
         CONT += 1
         
@@ -57,6 +58,7 @@ class Agent(pygame.sprite.Sprite):
 
         # vision sensor
         self.sensor = VisionSensor(position, self.orientation)
+        # list of closer markers
         self.markers = list()
 
     def hit_edges(self): # AQUI CONTINUAR
@@ -105,7 +107,7 @@ class Agent(pygame.sprite.Sprite):
 
         # if the movement is not null calculate the instantaneous movement
         v = zeros(2)
-        if norm(m) > 0.1:
+        if norm(m) > 0.1: # AQUI
             s = min(norm(m), (S/FPS))
             v = s * (m / norm(m))
             self.position += v
@@ -115,7 +117,7 @@ class Agent(pygame.sprite.Sprite):
         if np.any(v):
             self.orientation = v
 
-        # # teste
+        # # log draws
         # pygame.draw.line(window, GREEN, self.position, self.position+m)
         # # for marker in self.markers:
         # #     pygame.draw.line(window, (55, 55, 55), self.position, marker.position)
@@ -157,6 +159,8 @@ class Agent(pygame.sprite.Sprite):
         # pygame.draw.line(window, self.color, self.position, angleLineL,
         #                 max(1, int((self.size * self.size) / 100)))        
 
+        # self draw
         pygame.draw.circle(window, self.color, self.position, 3)  
 
-        # self.sensor.draw(window, self.color)    
+        # draw sensor
+        self.sensor.draw(window, self.color)    
