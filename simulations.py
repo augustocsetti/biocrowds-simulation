@@ -1,14 +1,16 @@
+import math
+
 import random
 
 from numpy import array
 
-from objects.agent import Agent
 from config import *
+from objects.agent import Agent
 
 
-def simulation_0(quantity=N_AGENTS):
+def simulation_0(num_agents=N_AGENTS):
     agents = []
-    for i in range(quantity):
+    for i in range(num_agents):
         agents.append(Agent(position=(SCREENWIDTH-50, 50), goal=(0, SCREENHEIGHT)))
     return agents
 
@@ -41,8 +43,22 @@ def simulation_2(quantities=N_AGENTS, lines=LINES):
             agents.append(Agent(pos, goal, PURPLE))
     return agents
 
+def simulation_3(num_agents=N_AGENTS, radius=SCREENHEIGHT/2, lines=1, color=None):
+    agents = []
+    center = array((SCREENWIDTH/2, SCREENHEIGHT/2))
+    step = 360//num_agents
+    for angle in range(0, 360, step):
+        for line in range(0, lines):
+            x = math.cos(math.radians(angle))*(radius-VISION*2*line)
+            y = math.sin(math.radians(angle))*(radius-VISION*2*line)
+            pos = center + array((x, y))
+            goal = center - array((x, y))
+            agents.append(Agent(pos, goal, color))  
+    return agents
+
 simulations = {
     '0': simulation_0,
     '1': simulation_1,
     '2': simulation_2,
+    '3': simulation_3,
 }
