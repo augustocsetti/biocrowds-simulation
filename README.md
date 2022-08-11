@@ -12,9 +12,9 @@ Os requisitos ou dependências para a execução da simulação estão disponív
 
 ## Executando
 
-<!-- A simulação pode ser executado através do comando:<br>
+A simulação pode ser executado através do comando:<br>
 
-``` python main.py ``` -->
+``` python biocrowds.py [-h] simulation_type```
 
 ## Como usar
 
