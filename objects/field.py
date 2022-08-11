@@ -55,3 +55,11 @@ class Field:
         x, y = grid
         for marker in self.grids_markers[x][y]:
             marker.set_owner(agents)
+
+    def draw(self, window, draw_grid, draw_mark):
+        if draw_grid:
+            for grid in self.grids_group:
+                grid.draw(window)
+        if draw_mark:
+            for marker in self.markers:
+                marker.draw(window)        

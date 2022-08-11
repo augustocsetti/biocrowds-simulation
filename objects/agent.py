@@ -136,32 +136,13 @@ class Agent(pygame.sprite.Sprite):
         if self.get_goal():
             self.on = False        
 
-    def draw(self, window: pygame.Surface):
+    def draw(self, window: pygame.Surface, draw_sensor=False):
         '''
         function that draws the agent
-        '''
-        # tip = normalizeto(self.orientation, self.size)
-        # tiplineEnd = (self.position[0] + tip[0],
-        #         self.position[1] + tip[1])
-
-        # angle = math.atan2(self.orientation[0], self.orientation[1]) + (math.pi*0.85)
-        # angle2 = math.atan2(self.orientation[0], self.orientation[1]) - (math.pi*0.85)
-        # angleLineR = (self.position[0] + math.sin(angle) * self.size,
-        #             self.position[1] + math.cos(angle) * self.size)
-        # angleLineL = (self.position[0] + math.sin(angle2) * self.size,
-        #             self.position[1] + math.cos(angle2) * self.size) 
-
-        # pygame.draw.line(window, self.color, angleLineR, tiplineEnd,
-        #                 max(1, int((self.size * self.size) / 100)))
-        # pygame.draw.line(window, self.color, angleLineL, tiplineEnd,
-        #                 max(1, int((self.size * self.size) / 100)))
-        # pygame.draw.line(window, self.color, self.position, angleLineR,
-        #                 max(1, int((self.size * self.size) / 100)))
-        # pygame.draw.line(window, self.color, self.position, angleLineL,
-        #                 max(1, int((self.size * self.size) / 100)))        
-
+        '''    
         # self draw
         pygame.draw.circle(window, self.color, self.position, 3)  
 
         # draw sensor
-        # self.sensor.draw(window, self.color)    
+        if draw_sensor:
+            self.sensor.draw(window, self.color)    
