@@ -32,6 +32,8 @@ class VisionSensor(pygame.sprite.Sprite):
         # window.blit(self.image, self.rect)
         pygame.draw.circle(window, color, self.rect.center, self.radius, 1)  
 
+    def check_visible_grids(self, grids_group:pygame.sprite.Group):
+        return(pygame.sprite.spritecollide(self, grids_group, False))
 
 class Agent(pygame.sprite.Sprite):
     def __init__(self, position, goal, color=None) -> None:
@@ -130,7 +132,7 @@ class Agent(pygame.sprite.Sprite):
         if self.grid != current_grid:
             self.grid = current_grid
 
-        # if self.hit_edges():
+        # check if gegts the goal
         if self.get_goal():
             self.on = False        
 
@@ -162,4 +164,4 @@ class Agent(pygame.sprite.Sprite):
         pygame.draw.circle(window, self.color, self.position, 3)  
 
         # draw sensor
-        self.sensor.draw(window, self.color)    
+        # self.sensor.draw(window, self.color)    

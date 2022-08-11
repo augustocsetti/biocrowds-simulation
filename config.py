@@ -10,8 +10,11 @@ SCREENHEIGHT = 560
 GRID = 80
 DENSITY = 80
 DISTANCE = 5
-VISION = 50 # 100
-S = 80
+VISION = 50
+S = 80 
+
+N_AGENTS = 10
+LINES = 2
 
 # base colors
 BLACK = (0, 0, 0)
