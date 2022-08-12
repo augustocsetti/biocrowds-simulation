@@ -24,7 +24,7 @@ class BioCrowds:
         print('Generating markers...')
         self.field.generate_markers()
         
-        # initial agents AQUI
+        # generate agents
         print('Generating agents...')
         self.agents:list = simulations[type]()
 
@@ -72,7 +72,8 @@ class BioCrowds:
                 if event.key == pygame.K_m:
                     self.draw_mark = not self.draw_mark                   
                 if event.key == pygame.K_r:
-                    self.agents.pop()                    
+                    try: self.agents.pop()                    
+                    except: pass
                 if event.key == pygame.K_s:
                     self.draw_sensor = not self.draw_sensor                  
         return
@@ -102,7 +103,7 @@ class BioCrowds:
         # updating agents position
         for agent in self.agents:
             agent.update(self.window)
-            # check if agent hit his goal # AQUI CONTINUAR
+            # check if agent hit his goal
             if not agent.on:
                 self.agents.remove(agent)
 

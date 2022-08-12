@@ -74,12 +74,10 @@ class Agent(pygame.sprite.Sprite):
         return False
 
     def get_goal(self): # AQUI CONTINUAR
-        # if (abs(self.position[0] - self.goal[0]) < GRID/4 and
-        #     abs(self.position[1] - self.goal[1]) < GRID/4):
-        #     return True
-        # else:
-        #     return False
-        return False
+        if dist(self.position, self.goal) < GRID/4:
+            return True
+        else:
+            return False
 
     def update(self, window):
         '''

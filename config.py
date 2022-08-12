@@ -13,7 +13,7 @@ DISTANCE = 5
 VISION = 50
 S = 75
 
-N_AGENTS = 10
+N_AGENTS = 8
 LINES = 2
 
 # base colors

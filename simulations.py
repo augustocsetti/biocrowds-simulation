@@ -9,15 +9,18 @@ from objects.agent import Agent
 
 
 def simulation_0(num_agents=N_AGENTS):
+    '''
+    One group going to its goal
+    '''
     agents = []
-    for i in range(num_agents):
+    for _ in range(num_agents):
         agents.append(Agent(position=(SCREENWIDTH-50, 50), goal=(0, SCREENHEIGHT)))
     return agents
 
-def simulation_1(goals=None, positions=None, quantities=N_AGENTS):
-    # if not goal:
-    #     goal = 1
-    # AQUI CONTINUAR
+def simulation_1(goals=None, positions=None, quantities=N_AGENTS): # AQUI CONTINUAR
+    '''
+    Crossing two groups in 'X' formation
+    '''
     agents = []
 
     # team 1
@@ -30,6 +33,9 @@ def simulation_1(goals=None, positions=None, quantities=N_AGENTS):
     return agents
 
 def simulation_2(quantities=N_AGENTS, lines=LINES):
+    '''
+    Crossing two groups created each side at the screen
+    '''
     agents = []
     for line in range (0, lines):
         for _ in range(quantities):
@@ -43,7 +49,10 @@ def simulation_2(quantities=N_AGENTS, lines=LINES):
             agents.append(Agent(pos, goal, PURPLE))
     return agents
 
-def simulation_3(num_agents=N_AGENTS, radius=SCREENHEIGHT/2, lines=1, color=None):
+def simulation_3(num_agents=N_AGENTS, radius=SCREENHEIGHT/2, lines=LINES, color=None):
+    '''
+    A circle group going to the oposite position
+    '''
     agents = []
     center = array((SCREENWIDTH/2, SCREENHEIGHT/2))
     step = 360//num_agents
