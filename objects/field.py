@@ -25,7 +25,7 @@ class Field:
 
         # list to store created markers
         self.grids_markers = [[[] for i in range(self.grid_len[1])] for j in range(self.grid_len[0])]
-        self.markers  = []
+        self.markers  = pygame.sprite.Group()
 
     def generate_markers(self, density = DENSITY, distance = DISTANCE):
         # list to iterate each new marker created
@@ -47,7 +47,7 @@ class Field:
                     if space_available:
                         new_marker = Marker(new_pos, color=MARKER_COLOR)
                         markers_grid.append(new_marker)
-                        self.markers.append(new_marker)
+                        self.markers.add(new_marker)
                         self.grids_markers[x][y].append(new_marker)
                         m += 1
     

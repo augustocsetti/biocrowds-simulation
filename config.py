@@ -6,6 +6,9 @@ FPS = 30
 SCREENWIDTH = 1200
 SCREENHEIGHT = 600
 
+# agent
+SIZE = 15
+
 # simulation
 GRID = 100
 DENSITY = 150
@@ -13,8 +16,8 @@ DISTANCE = 5
 VISION = 50
 S = 75
 
-N_AGENTS = 8
-LINES = 2
+N_AGENTS = 5
+LINES = 4
 
 # base colors
 BLACK = (0, 0, 0)

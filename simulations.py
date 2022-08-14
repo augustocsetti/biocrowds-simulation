@@ -49,7 +49,7 @@ def simulation_2(quantities=N_AGENTS, lines=LINES):
             agents.append(Agent(pos, goal, PURPLE))
     return agents
 
-def simulation_3(num_agents=N_AGENTS, radius=SCREENHEIGHT/2, lines=LINES, color=None):
+def simulation_3(num_agents=N_AGENTS, radius=SCREENHEIGHT/2, lines=2, color=None):
     '''
     A circle group going to the oposite position
     '''

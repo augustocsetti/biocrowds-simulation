@@ -51,7 +51,7 @@ class Agent(pygame.sprite.Sprite):
         else:
             self.color = (random.random() * 255*(2/3), random.random() * 255*(2/3), random.random() * 255*(2/3))
 
-        self.size = 15
+        self.size = SIZE
         self.position = array(position, dtype=float)       
         self.orientation = array((random.random(), random.random()))
         self.grid = (floor(position[0]/GRID), floor(position[1]/GRID))

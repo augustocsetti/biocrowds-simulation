@@ -48,3 +48,9 @@ class Marker(pygame.sprite.Sprite):
     def set_color(self, color:tuple):
         self.color = color
         self.image.fill(color)
+
+    def reset_owner(self):
+        if self.owner:
+            self.owner.markers.remove(self)
+            self.owner = None
+            self.set_color(self.color_base)

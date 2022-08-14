@@ -22,6 +22,11 @@ A simulação pode ser executado através do comando:<br>
 - Mouse: Um clique do mouse adiciona um novo agente
 - R: excluí o último agente inserito -->
 
+## To do
+- Aprimorar relação de objetos e marcadores
+- Implementar grupos ao invés de listas
+- Aprimorar colisão com formato circular (get_collision em cada classe)
+
 ## Referencias
 
 <!-- - Craig Reynolds website: http://www.red3d.com/cwr/steer/

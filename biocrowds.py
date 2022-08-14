@@ -4,8 +4,10 @@ import sys
 import pygame
 
 from config import *
-from objects.field import Field
 from simulations import *
+from objects.field import Field
+from objects.block import Block
+from objects.circle import Circle
 from tools.arg_parser import build_parser
 
 
@@ -28,6 +30,12 @@ class BioCrowds:
         print('Generating agents...')
         self.agents:list = simulations[type]()
 
+        # generate obstacle AQUI TESTE
+        self.obstacles = pygame.sprite.Group()
+        self.obstacles.add(Block((SCREENWIDTH/2, SCREENHEIGHT/2), array((200, 100))))
+        self.obstacles.add(Circle((SCREENWIDTH/2+50, SCREENHEIGHT/3), 50))
+        # self.obstacles.add(Block((SCREENWIDTH/2, SCREENHEIGHT/3), array((50, 200))))
+
         # matrix to store the current grid of all agents
         self.current_grid = [[[] for i in range(self.field.grid_len[1])] for j in range(self.field.grid_len[0])]
 
@@ -38,12 +46,12 @@ class BioCrowds:
 
         print('All done!')
 
-    def loop(self):
+    def run(self):
         self.start = False
         self.run = True
         while(self.run):
             self.window.fill(BLACK)
-
+    
             self.event_handler()
             if self.start:
                 self.update()
@@ -100,16 +108,25 @@ class BioCrowds:
                     for marker in self.field.grids_markers[x][y]:
                         marker.set_color(marker.color_base)
 
+        # checking obstacle position # AQUI
+        collides_marker_obstacle = pygame.sprite.groupcollide(self.field.markers, self.obstacles,  False, False)
+        if collides_marker_obstacle:
+            for marker in collides_marker_obstacle:
+                marker.reset_owner()
+
         # updating agents position
         for agent in self.agents:
             agent.update(self.window)
             # check if agent hit his goal
-            if not agent.on:
-                self.agents.remove(agent)
+            # if not agent.on:
+            #     self.agents.remove(agent)
 
     def draw(self):
         # elements of field
         self.field.draw(self.window, self.draw_grid, self.draw_mark)
+        # obstacles
+        for obstacle in self.obstacles:
+            obstacle.draw(self.window)
         # agents
         for agent in self.agents:
             agent.draw(self.window, self.draw_sensor)
@@ -136,4 +153,4 @@ if __name__ == '__main__':
 
     biocrowds = BioCrowds(type)
     biocrowds.print_instructions()
-    biocrowds.loop()
+    biocrowds.run()
